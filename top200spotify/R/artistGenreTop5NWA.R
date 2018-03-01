@@ -1,4 +1,5 @@
 source('getData.R')
+source('~/Dropbox/LNCC/Doutorado/Disciplinas/Ciência de Redes/Project/getData022018.R')
 
 # Genre - Country (Top 5 Genres) #####################################################
 # Pegando apenas 5 gêneros para cada pais, de um top 200 artistas
@@ -213,13 +214,6 @@ plot(market.genre.comunities,
      vertex.label.cex=.7
      )
 
-
-# Closenss #######################################################
-
-closeness(market.top5genre.projec$proj1, vids = V(market.top5genre.projec$proj1), 
-          mode = "all",
-          E(market.top5genre.projec$proj1)$weight, normalized = T)
-
 # Total of tracks, artists e genres (each country) ######################################
 
 colnames(top200complete)
@@ -411,3 +405,4 @@ hist(market.top5genre.deg, breaks=1:vcount(market.top5genre.projec$proj1)-1,
      xlab="Nós", ylab="Frequência", col=colors[4],
      ylim=c(0, 35),
      xlim = c(0,57), xaxt='n'); axis(side = 1, at=seq(0,55,5))
+
