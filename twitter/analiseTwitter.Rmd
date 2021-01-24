@@ -106,7 +106,7 @@ ggplot(top5users_tweets, aes(x = screen_name, y = n)) +
     theme_minimal()
 ```
 
-Da mesma forma, para identificar os cinco perfis (@) que receberam mais curtidas seus tweets é possível realizar a contagem feita também a partir do nome dos usuários, agregando pelo somatório de likes que cada tweet recebeu:
+Da mesma forma, para identificar os cinco perfis (@) que receberam mais curtidas em seus tweets é possível realizar a contagem feita também a partir do nome dos usuários, agregando pelo somatório de likes que cada tweet recebeu:
 
 ```{r}
 top5users_favorite <- tweets %>%
@@ -164,7 +164,7 @@ ggplot(freq_table, aes(x = bm, y = n, group = 1)) +
 
 ### __Análise da rede de usuários__
 
-Uma forma de considerar a relação entre usuários pode ser através de replies e retweets que acontecem entre usuários. Para isso, é necessário ajustar os dados para definir essas relações:
+Uma forma de definir a relação entre usuários pode ser através de replies e retweets que acontecem entre eles Para isso, é necessário ajustar os dados para definir essas relações:
 
 ```{r}
 # Obter a relação  usuário - retweetou - usuário
@@ -189,7 +189,7 @@ net <- graph_from_data_frame(d = interacoes, vertices = user_nodes, directed = T
 V(net)$color <- paleta_its[2] # Definir uma cor para os nós da rede
 ```
 
-A rede resultou em `r length(V(net))` usuários e `r length(E(net))` vértices. Além disso, a rede é direcionada, ou seja, mostra a direção relação (ex. quem retweetou quem). 
+A rede resultou em `r length(V(net))` usuários e `r length(E(net))` areastas. Além disso, a rede é direcionada, ou seja, mostra a direção relação (ex. quem retweetou quem). 
 
 ```{r, echo=FALSE}
 # Visualização da rede
@@ -245,7 +245,7 @@ ggplot(top3out_degree, aes(x = screen_name, y = out_degree)) +
 
 ### __Outras # e temas relacionados__
 
-Para as hashtags, é feita uma contagem de quantas vezes aparecem junto à #VotoImpresso2022:
+Para as verificar quais outras hashtags aparecem junto à #VotoImpresso2022, podemos usar o atributo 'text' do conjunto de dados, selecionar e contabilizar apenas as hashtags:
 
 ```{r}
 outras_hashtags <- tweets %>%
@@ -270,7 +270,7 @@ ggplot(outras_hashtags[1:15,], aes(x = hashtags, y = n)) +
     theme_minimal()
 ```
 
-Para verificar outros temas, é considerada a coluna 'text' que contém o texto do tweet. Esses tweets compreendem então um corpus e é feita uma limpeza para retirar as hashtags, menções à outros usuários, urls, emojis, números, pontuações e stopwords.
+Da mesma forma, para verificar outros temas também é necessário utilizar a coluna 'text'. Esses tweets compreendem um corpus que deve passar por um processo de limpeza para retirar as hashtags, menções à outros usuários, urls, emojis, números, pontuações e stopwords:
 
 ```{r, warning=FALSE}
 text <- tweets$text
