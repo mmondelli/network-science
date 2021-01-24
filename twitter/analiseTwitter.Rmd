@@ -1,12 +1,3 @@
----
-title: "Processo Seletivo - Cientista de Dados"
-author: "Democracia e Tecnologia - Maria Luiza Mondelli"
-output:
-  html_document:
-    df_print: paged
-  github_document: default
----
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
