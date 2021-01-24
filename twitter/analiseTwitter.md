@@ -1,3 +1,4 @@
+
 ### **Sobre o exercício**
 
 #### **O quê**
@@ -64,7 +65,7 @@ cada linha da base de dados representa um tweet:
 ![](analiseTwitter_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 Da mesma forma, para identificar os cinco perfis (@) que receberam mais
-curtidas seus tweets é possível realizar a contagem feita também a
+curtidas em seus tweets é possível realizar a contagem feita também a
 partir do nome dos usuários, agregando pelo somatório de likes que cada
 tweet recebeu:
 
@@ -99,8 +100,8 @@ Para a visualização, a contagem é feita em intervalos de 10 minutos.
 
 ### **Análise da rede de usuários**
 
-Uma forma de considerar a relação entre usuários pode ser através de
-replies e retweets que acontecem entre usuários. Para isso, é necessário
+Uma forma de definir a relação entre usuários pode ser através de
+replies e retweets que acontecem entre eles Para isso, é necessário
 ajustar os dados para definir essas relações:
 
     # Obter a relação  usuário - retweetou - usuário
@@ -124,7 +125,7 @@ ajustar os dados para definir essas relações:
     net <- graph_from_data_frame(d = interacoes, vertices = user_nodes, directed = T) # Construir a rede
     V(net)$color <- paleta_its[2] # Definir uma cor para os nós da rede
 
-A rede resultou em 65 usuários e 65 vértices. Além disso, a rede é
+A rede resultou em 65 usuários e 65 areastas. Além disso, a rede é
 direcionada, ou seja, mostra a direção relação (ex. quem retweetou
 quem).
 
@@ -163,8 +164,9 @@ conexões de cada nó (centralidade de grau):
 
 ### **Outras \# e temas relacionados**
 
-Para as hashtags, é feita uma contagem de quantas vezes aparecem junto à
-\#VotoImpresso2022:
+Para as verificar quais outras hashtags aparecem junto à
+\#VotoImpresso2022, podemos usar o atributo ‘text’ do conjunto de dados,
+selecionar e contabilizar apenas as hashtags:
 
     outras_hashtags <- tweets %>%
         unnest_tokens(hashtags, text, "tweets", to_lower = FALSE) %>%
@@ -176,10 +178,10 @@ Para as hashtags, é feita uma contagem de quantas vezes aparecem junto à
 
 ![](analiseTwitter_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
-Para verificar outros temas, é considerada a coluna ‘text’ que contém o
-texto do tweet. Esses tweets compreendem então um corpus e é feita uma
-limpeza para retirar as hashtags, menções à outros usuários, urls,
-emojis, números, pontuações e stopwords.
+Da mesma forma, para verificar outros temas também é necessário utilizar
+a coluna ‘text’. Esses tweets compreendem um corpus que deve passar por
+um processo de limpeza para retirar as hashtags, menções à outros
+usuários, urls, emojis, números, pontuações e stopwords:
 
     text <- tweets$text
     removeHashtag <- content_transformer(function(x) gsub("#([a-z|A-Z|0-9|_|á-ú])*",'', x, perl = F))
