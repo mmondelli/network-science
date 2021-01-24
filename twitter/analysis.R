@@ -156,10 +156,10 @@ V(net)$color <- paleta_its[2] # Definir uma cor para os nós da rede
 
 # Visualização da rede
 ggraph(net, layout = 'kk') +
-    geom_edge_fan(aes(colour = type), width = 0.4) +  # colors by edge type
+    geom_edge_fan(aes(colour = type), width = 0.4) +
     geom_node_point(color=V(net)$color, size = 3) +
-    geom_edge_link(aes(colour = type), width = 0.4,
-                   arrow = arrow(length = unit(2, 'mm'))) + # size by audience size
+    #geom_edge_link(aes(colour = type), width = 0.4,
+    #               arrow = arrow(length = unit(2, 'mm'))) +
     theme_void() +
     theme(legend.position="top",
           legend.box = "horizontal",
